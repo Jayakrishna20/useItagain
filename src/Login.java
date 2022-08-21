@@ -8,7 +8,6 @@ import model.User;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author jayak
@@ -16,6 +15,7 @@ import model.User;
 public class Login extends javax.swing.JFrame {
 
     public String emailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
+
     /**
      * Creates new form Login
      */
@@ -24,22 +24,22 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setEnabled(false);
     }
 
-    public void clear() {        
-        txtEmail.setText("");               
-        txtPassword.setText("");        
+    public void clear() {
+        txtEmail.setText("");
+        txtPassword.setText("");
         btnLogin.setEnabled(false);
     }
-    
-    public void validateFields(){
+
+    public void validateFields() {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
-        if(email.matches(emailPattern) && !password.equals("")){
+        if (email.matches(emailPattern) && !password.equals("")) {
             btnLogin.setEnabled(true);
-        }
-        else{
+        } else {
             btnLogin.setEnabled(false);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,25 +167,25 @@ public class Login extends javax.swing.JFrame {
         String password = txtPassword.getText();
         User user = null;
         user = UserDao.login(email, password);
-        if(user == null)
-            JOptionPane.showMessageDialog(null,"<html><b style =\"color:red\">Incorrect Username or Password</b></html>","Message",JOptionPane.ERROR_MESSAGE);
-        else
-            if(user.getStatus().equals("false")){
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "<html><b style =\"color:red\">Incorrect Username or Password</b></html>", "Message", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (user.getStatus().equals("false")) {
                 ImageIcon icon = new ImageIcon("src/popupicon/wait.png");
-                JOptionPane.showMessageDialog(null,"<html><b>Wait for Admin Approval</b></html>","Message",JOptionPane.INFORMATION_MESSAGE,icon);
-                clear();                
+                JOptionPane.showMessageDialog(null, "<html><b>Wait for Admin Approval</b></html>", "Message", JOptionPane.INFORMATION_MESSAGE, icon);
+                clear();
             }
-        if(user.getStatus().equals("true")){
-            setVisible(false);
-            new Home(email).setVisible(true);
+            if (user.getStatus().equals("true")) {
+                setVisible(false);
+                new Home(email).setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Do you really want to close application","Select",JOptionPane.YES_NO_OPTION);
-        if(a==0)
-        {
+        int a = JOptionPane.showConfirmDialog(null, "Do you really want to close application", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnExitActionPerformed
